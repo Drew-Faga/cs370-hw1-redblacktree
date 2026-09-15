@@ -5,6 +5,7 @@
 static void rot_L(rb_tree *t, rb_node *x);
 static void rot_R(rb_tree *t, rb_node *y);
 static void fix_ins(rb_tree *t, rb_node *n);
+static void fix_del(rb_tree *t, rb_node *x)
 
 /* makes a new tree with just the shared   leaf */
 rb_tree *rb_create_tree(void) {
@@ -33,7 +34,7 @@ static void rot_L(rb_tree *t, rb_node *x) {
     if (x->parent == t->nil) t->root = y;
     else if (x == x->parent->left) x->parent->left = y;
     else x->parent->right = y;
-    y->left = x; x->parent = x;
+    y->left = x; x->parent = y;
 }
 
 /* rotates the tree right around y */
@@ -98,29 +99,35 @@ void rb_print_inorder(rb_tree *t) { print_r(t, t->root); printf("\n"); }
 /* removes a value from the tree */
 void rb_delete(rb_tree *t, int num) {
     rb_node *z = t->root;
-    while (z != t->nil && z->data != num) z = (num < z->data) ? z->left : z->right;
-    if (z == t->nil) return;
+    while (z != t->nil && z->data != num)
+        z = (num <z ->data) ? z-> left : z->right;
+        if (z == t->nil) return; 
+     /*this fixes the rb_delete function which tracks col and the replacement node.*/ 
+    rb_node *x;
+    int col = z->color;
 
     if (z->left == t->nil) {
-        if (z->parent == t->nil) t->root = z->right;
-        else if (z == z->parent->left) z->parent->left = z->right;
-        else z->parent->right = z->right;
-        z->right->parent = z->parent;
+        x = z->right; //changed the z to a x
+        if (z->parent == t->nil) t->root = x 
+        else if (z == z->parent->left) z->parent->left = x;
+        else z->parent->right = x;
+        x->parent = z->parent;
     } else if (z->right == t->nil) {
-        if (z->parent == t->nil) t->root = z->left;
-        else if (z == z->parent->left) z->parent->left = z->left;
-        else z->parent->right = z->left;
+        x = z->left
+        if (z->parent == t->nil) t->root = x;
+        else if (z->parent == t->left) z->parent->left = x;
+ 
+         z->parent->right = z->left;
         z->left->parent = z->parent;
     } else {
         rb_node *s = z->right;
         while (s->left != t->nil) s = s->left;
         z->data = s->data;
-        if (s->parent->left == s) s->parent->left = s->right;
-        else s->parent->right = s->right;
-        s->right->parent = s->parent;
-        z = s;
-    }
-    free(z);
+        col = s->color;
+        x = s->right
+        if (s->parent->left == s) s->parent->left = x;
+        else s->parent->right =x;
+       free (z); 
 }
 
 /* checks that the tree still follows the color rules */
