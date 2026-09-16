@@ -18,6 +18,17 @@
         "isDefault": true
       },
       "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "run with drmemory",
+      "type": "shell",
+      "command": "C:\\Users\\Drew\\Desktop\\DrMemory-Windows-2.6.0\\bin64\\drmemory.exe",
+      "args": [
+        "--",
+        "${workspaceFolder}/build/Debug/outDebug.exe"
+      ],
+      "dependsOn": "build rbtree",
+      "problemMatcher": []
     }
   ]
 }
