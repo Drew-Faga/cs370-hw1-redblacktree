@@ -9,7 +9,8 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/Drew/Desktop/cs370-hw1-redblacktree",
-      "program": "c:/Users/Drew/Desktop/cs370-hw1-redblacktree/build/Debug/outDebug",
+      "program": "c:/Users/Drew/Desktop/cs370-hw1-redblacktree/build/Debug/outDebug.exe",
+      "preLaunchTask": "build rbtree",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

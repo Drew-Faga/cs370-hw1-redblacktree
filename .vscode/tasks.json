@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build rbtree",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "-g",
+        "-Wall",
+        "-o",
+        "${workspaceFolder}/build/Debug/outDebug.exe",
+        "${workspaceFolder}/main.c",
+        "${workspaceFolder}/rbtree.c"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
