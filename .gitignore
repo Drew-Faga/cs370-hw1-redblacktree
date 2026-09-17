@@ -2,3 +2,5 @@ build/
 *.exe
 *.obj
 *.pdb
+rbtest
+rbtest_check

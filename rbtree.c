@@ -204,5 +204,6 @@ static void free_r(rb_tree *t, rb_node *n) {
  
 void rb_free_tree(rb_tree *t) {
     free_r(t, t->root);
+    free(t->nil);
     free(t);
 }
